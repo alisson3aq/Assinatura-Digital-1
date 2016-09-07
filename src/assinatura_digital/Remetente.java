@@ -10,28 +10,29 @@ import java.security.SecureRandom;
 import java.security.Signature;
 import java.security.SignatureException;
 
-public class RemetenteAssiDig {
+public class Remetente{
 
-	private PublicKey pubKey;
+	private PublicKey chavePublica;
 
-	public PublicKey getPubKey() {
-		return pubKey;
+	public PublicKey getChavePublica() {
+		return chavePublica;
 	}
 
-	public void setPubKey(PublicKey pubKey) {
-		this.pubKey = pubKey;
+	public void setChavePublica(PublicKey outraChavePublica) {
+		this.chavePublica = outraChavePublica;
 	}
 
 	public byte[] geraAssinatura(String mensagem)
 			throws NoSuchAlgorithmException, InvalidKeyException, SignatureException {
+		
 		Signature sig = Signature.getInstance("DSA");
 
-		// Geração das chaves públicas e privadas
+		// Geracao das chaves publicas e privadas
 		KeyPairGenerator kpg = KeyPairGenerator.getInstance("DSA");
 		SecureRandom secRan = new SecureRandom();
 		kpg.initialize(512, secRan);
 		KeyPair keyP = kpg.generateKeyPair();
-		this.pubKey = keyP.getPublic();
+		this.chavePublica = keyP.getPublic();
 		PrivateKey priKey = keyP.getPrivate();
 
 		// Inicializando Obj Signature com a Chave Privada

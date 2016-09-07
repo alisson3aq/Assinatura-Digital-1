@@ -9,42 +9,43 @@ import java.util.Scanner;
 public class AssinaturaDigital {
 
 	public static void main(String args[]) throws NoSuchAlgorithmException, InvalidKeyException, SignatureException {
-		Scanner sc = new Scanner(System.in);
+		Scanner ler = new Scanner(System.in);
 
 		// Remetente Gera Assinatura Digital para uma Mensagem
-		RemetenteAssiDig remetenteAssiDig = new RemetenteAssiDig();
-		String mensagem = sc.nextLine();
+		Remetente remetenteAssiDig = new Remetente();
+		String mensagem = ler.nextLine();
 		byte[] assinatura = remetenteAssiDig.geraAssinatura(mensagem);
-		// Guarda Chave Pública para ser Enviada ao Destinatário
-		PublicKey pubKey = remetenteAssiDig.getPubKey();
+		
+		// Guarda Chave Publica para ser Enviada ao Destinatario
+		PublicKey pubKey = remetenteAssiDig.getChavePublica();
 
-		// Destinatário recebe dados correto
-		DestinatarioAssiDig destinatarioAssiDig = new DestinatarioAssiDig();
+		// Destinatario recebe dados correto
+		Destinatario destinatarioAssiDig = new Destinatario();
 		destinatarioAssiDig.recebeMensagem(pubKey, mensagem, assinatura);
 
-		// Destinatário recebe mensagem alterada
-		String msgAlterada = sc.nextLine();
+		// Destinatario recebe mensagem alterada
+		String msgAlterada = ler.nextLine();
 		destinatarioAssiDig.recebeMensagem(pubKey, msgAlterada, assinatura);
 		
-		sc.nextLine();
-		outraAssinaturaEChave(remetenteAssiDig, destinatarioAssiDig, pubKey, mensagem, assinatura, sc);
+		ler.nextLine();
+		outraAssinaturaEChave(remetenteAssiDig, destinatarioAssiDig, pubKey, mensagem, assinatura, ler);
 
 	}
 
-	public static void outraAssinaturaEChave(RemetenteAssiDig remetenteAssiDig, DestinatarioAssiDig destinatarioAssiDig, 
+	public static void outraAssinaturaEChave(Remetente remetenteAssiDig, Destinatario destinatarioAssiDig, 
 			PublicKey pubKey, String mensagem, byte[] assinatura, Scanner sc) throws InvalidKeyException, NoSuchAlgorithmException, SignatureException {
 		
 		// Criando outra Assinatura
 		String mensagem2 = "Exemplo de outra mensagem.";
 		byte[] assinatura2 = remetenteAssiDig.geraAssinatura(mensagem2);
 		// Guarda Chave Pública para ser Enviada ao Destinatário
-		PublicKey pubKey2 = remetenteAssiDig.getPubKey();
+		PublicKey pubKey2 = remetenteAssiDig.getChavePublica();
 		
-		// Destinatário recebe outra assinatura
+		// Destinatario recebe outra assinatura
 		destinatarioAssiDig.recebeMensagem(pubKey, mensagem, assinatura2);
 		
 		sc.nextLine();
-		// Destinatário recebe outra chave pública
+		// Destinatario recebe outra chave publica
 		destinatarioAssiDig.recebeMensagem(pubKey2, mensagem, assinatura);
 
 	}
