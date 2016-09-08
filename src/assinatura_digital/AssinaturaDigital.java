@@ -43,10 +43,12 @@ public class AssinaturaDigital {
 		
 		// Destinatario recebe outra assinatura
 		destinatarioAssiDig.recebeMensagem(pubKey, mensagem, assinatura2);
+		System.out.println("Chave Publica: " + pubKey);
 		
 		sc.nextLine();
 		// Destinatario recebe outra chave publica
 		destinatarioAssiDig.recebeMensagem(pubKey2, mensagem, assinatura);
+		System.out.println("Chave Publica: " + pubKey2);
 
 	}
 
