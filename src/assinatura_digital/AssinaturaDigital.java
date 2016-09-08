@@ -13,6 +13,7 @@ public class AssinaturaDigital {
 
 		// Remetente Gera Assinatura Digital para uma Mensagem
 		Remetente remetenteAssiDig = new Remetente();
+		System.out.println("Digite uma mensagem: ");
 		String mensagem = ler.nextLine();
 		byte[] assinatura = remetenteAssiDig.geraAssinatura(mensagem);
 		
@@ -24,6 +25,7 @@ public class AssinaturaDigital {
 		destinatarioAssiDig.recebeMensagem(pubKey, mensagem, assinatura);
 
 		// Destinatario recebe mensagem alterada
+		System.out.println("\nDigite uma mensagem: ");
 		String msgAlterada = ler.nextLine();
 		destinatarioAssiDig.recebeMensagem(pubKey, msgAlterada, assinatura);
 		
