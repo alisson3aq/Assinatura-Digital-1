@@ -30,16 +30,15 @@ public class AssinaturaDigital {
 		destinatarioAssiDig.recebeMensagem(pubKey, msgAlterada, assinatura);
 		
 		ler.nextLine();
-		outraAssinaturaEChave(remetenteAssiDig, destinatarioAssiDig, pubKey, mensagem, assinatura, ler);
+		outraAssinaturaEChave(remetenteAssiDig, destinatarioAssiDig, pubKey, mensagem, msgAlterada,assinatura, ler);
 		
 	}
 
 	public static void outraAssinaturaEChave(Remetente remetenteAssiDig, Destinatario destinatarioAssiDig, 
-			PublicKey pubKey, String mensagem, byte[] assinatura, Scanner sc) throws InvalidKeyException, NoSuchAlgorithmException, SignatureException {
+			PublicKey pubKey, String mensagem, String msgAlterada, byte[] assinatura, Scanner sc) throws InvalidKeyException, NoSuchAlgorithmException, SignatureException {
 		
 		// Criando outra Assinatura
-		String mensagem2 = "Exemplo de outra mensagem.";
-		byte[] assinatura2 = remetenteAssiDig.geraAssinatura(mensagem2);
+		byte[] assinatura2 = remetenteAssiDig.geraAssinatura(msgAlterada);
 		// Guarda Chave Pública para ser Enviada ao Destinatário
 		PublicKey pubKey2 = remetenteAssiDig.getChavePublica();
 		
