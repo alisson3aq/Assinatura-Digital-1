@@ -29,7 +29,7 @@ public class AssinaturaDigital {
 		
 		ler.nextLine();
 		outraAssinaturaEChave(remetenteAssiDig, destinatarioAssiDig, pubKey, mensagem, assinatura, ler);
-
+		
 	}
 
 	public static void outraAssinaturaEChave(Remetente remetenteAssiDig, Destinatario destinatarioAssiDig, 

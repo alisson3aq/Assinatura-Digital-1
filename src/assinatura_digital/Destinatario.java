@@ -18,13 +18,19 @@ public class Destinatario {
 		if (clientSig.verify(assinatura)) {
 			// Mensagem corretamente assinada
 			String linha = "";
-			linha += "A Mensagem recebida foi assinada corretamente. \n"
+			linha += "**A Mensagem recebida foi assinada corretamente.** \n"
 					+ "Mensagem : " + mensagem.toString() + "\n"
-					+ "Assinatura: " + assinatura.toString();
+					+ "Assinatura: " + assinatura.toString() + "\n"
+					+ "Chave Pública: " + pubKey.toString();
 			System.out.println(linha);
 		} else {
-			// Mensagem nÃ£o pode ser validada
-			System.out.println("A Mensagem recebida NAO pode ser validada.");
+			// Mensagem nao pode ser validada
+			String linha = "";
+			linha += "**A Mensagem recebida NAO pode ser validada.** \n"
+					+ "Mensagem : " + mensagem.toString() + "\n"
+					+ "Assinatura: " + assinatura.toString() + "\n"
+					+ "Chave Pública: " + pubKey.toString();
+			System.out.println(linha);
 		}
 	}
 
